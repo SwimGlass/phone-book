@@ -28,22 +28,13 @@ int main(int argc, char *argv[])
     char line[MAX_LAST_NAME_SIZE];
     struct timespec start, end;
     double cpu_time1, cpu_time2;
-
+    
     /* check file opening */
     fp = fopen(DICT_FILE, "r");
     if (fp == NULL) {
         printf("cannot open the file\n");
         return -1;
     }
-
-#ifdef MAX_HASH_SIZE
-    /* initial hash table */
-#include "phonebook_opt.h"
-    int a;
-    for (a = 0; a < MAX_HASH_SIZE; a++) {
-        hash_table[a] = NULL;
-    }
-#endif
 
     /* build the entry */
     lastNameEntry *nameHead,*e;
@@ -75,7 +66,7 @@ int main(int argc, char *argv[])
     e = nameHead;
 
     assert(findName_opt(input, e) &&
-            "Did you implement findName() in " IMPL "?");
+           "Did you implement findName() in " IMPL "?");
     assert(0 == strcmp(findName_opt(input, e)->lastName, "zyxel"));
 
 #if defined(__GNUC__)
